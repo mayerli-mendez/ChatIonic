@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Sing in</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<style>
+  *{
+    font-family: 'Nerko One', cursive;
+  }
+</style>
+
+<ion-content class="ion-padding">
+  <img style="height: 40%;" src="https://cdn-icons-png.flaticon.com/512/5858/5858332.png" alt="">
+  <form class="form" [formGroup]="validations_form" (ngSubmit)="tryRegister(validations_form.value)">
+
+    <ion-item>
+      <ion-label position="floating" >Correo</ion-label>
+      <ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <ion-badge color="danger" class="error-message"
+          *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+          {{ validation.message }}
+        </ion-badge>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" placeholder="password" formControlName="password" class="form-controll" required></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <ion-badge color="danger" class="error-message"
+          *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+          {{ validation.message }}
+        </ion-badge>
+      </ng-container>
+    </div>
+    <br>
+    <br>
+    <br>
+    <ion-button  color="success" expand="block" type="submit" >Registrarse</ion-button>
+    <ion-badge  color="danger" class="error-message">{{errorMessage}}</ion-badge>
+    <ion-badge  color="danger" class="success-message">{{successMessage}}</ion-badge>
+  </form>
+
+  <ion-button color="medium" (click)="goLoginPage()" expand="block">Inicia Sesión</ion-button>
+  
+</ion-content>
